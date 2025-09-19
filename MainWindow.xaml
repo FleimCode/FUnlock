@@ -1,0 +1,124 @@
+﻿<Window x:Class="FUnlock.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="FUnlock - System Recovery Tool" Height="1052" Width="797"
+        WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
+        Background="#FF2D2D30" Foreground="White">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#FF007ACC"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF1C97EA"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#FF005A9E"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="GroupBox">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FF007ACC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="Padding" Value="10"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="10">
+
+                <GroupBox Header="🔓 Разблокировка системы">
+                    <WrapPanel>
+                        <Button Name="btnUnlockTaskManager" Content="Разблокировать диспетчер задач" Click="UnlockTaskManager_Click" Width="220"/>
+                        <Button Name="btnUnlockRegistry" Content="Разблокировать редактор реестра" Click="UnlockRegistry_Click" Width="210"/>
+                        <Button Name="btnUnlockCMD" Content="Разблокировать командную строку" Click="UnlockCMD_Click" Width="222"/>
+                        <Button Name="btnUnlockLock" Content="Разблокировать смену пользователя" Click="UnlockLock_Click" Width="220"/>
+                    </WrapPanel>
+                </GroupBox>
+
+                <GroupBox Header="🌐 Сеть и безопасность">
+                    <WrapPanel>
+                        <Button Name="btnEnableSecurity" Content="Включить средства безопасности Windows" Click="EnableSecurity_Click" Width="260"/>
+                        <Button Name="btnFixDNS" Content="Исправить DNS" Click="FixDNS_Click" Width="200"/>
+                    </WrapPanel>
+                </GroupBox>
+
+                <GroupBox Header="🔧 Восстановление системы">
+                    <WrapPanel>
+                        <Button Name="btnRestoreCursor" Content="Восстановить курсор по умолчанию" Click="RestoreCursor_Click" Width="221"/>
+                        <Button Name="btnFixLanguage" Content="Восстановить языковые настройки" Click="FixLanguage_Click" Width="223"/>
+                        <Button Name="btnRestoreDesktop" Content="Восстановить рабочий стол" Click="RestoreDesktop_Click" Width="200"/>
+                        <Button Name="btnFixStartMenu" Content="Исправить меню Пуск" Click="FixStartMenu_Click" Width="200"/>
+                        <Button Name="btnResetDNS" Content="Сбросить DNS кэш" Click="ResetDNS_Click" Width="200"/>
+                        <Button Name="btnFixNetworking" Content="Исправить сетевые настройки" Click="FixNetworking_Click" Width="200"/>
+                        <Button Name="btnCleanStartup" Content="Очистить автозапуск реестра" Click="CleanStartup_Click" Width="200"/>
+                    </WrapPanel>
+                </GroupBox>
+
+                <GroupBox Header="📂 Управление файлами и папками">
+                    <WrapPanel>
+                        <Button Name="btnShowHiddenFiles" Content="Показать скрытые файлы" Click="ShowHiddenFiles_Click" Width="200"/>
+                        <Button Name="btnRemoveAutorunInf" Content="Удалить Autorun.inf" Click="RemoveAutorunInf_Click" Width="200"/>
+                        <Button Name="btnRemoveRestrictions" Content="Удалить все ограничения" Click="RemoveRestrictions_Click" Width="200"/>
+                    </WrapPanel>
+                </GroupBox>
+
+                <GroupBox Header="📈 Оптимизация и очистка">
+                    <WrapPanel>
+                        <Button Name="btnCleanTemp" Content="Очистить временные файлы" Click="CleanTemp_Click" Width="200"/>
+                        <Button Name="btnStopServices" Content="Остановить подозрительные службы" Click="StopServices_Click" Width="250"/>
+                        <Button Name="btnCleanHost" Content="Очистить файл hosts" Click="CleanHost_Click" Width="200"/>
+                        <Button Name="btnKillProcesses" Content="Завершить подозрительные процессы" Click="KillProcesses_Click" Width="250"/>
+                    </WrapPanel>
+                </GroupBox>
+
+                <GroupBox Header="📈 Управление процессами">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBox Name="txtProcessName" Width="300" Margin="0,0,10,0" Text="Введите имя процесса" GotFocus="txtProcessName_GotFocus" LostFocus="txtProcessName_LostFocus"/>
+                        <Button Name="btnKillSpecificProcess" Content="Завершить процесс" Click="KillSpecificProcess_Click"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="🔧 Дополнительные инструменты">
+                    <WrapPanel>
+                        <Button Name="btnScanSFC" Content="Запустить SFC сканирование" Click="ScanSFC_Click" Width="180"/>
+                        <Button Name="btnUpdateSystem" Content="Проверить обновления" Click="UpdateSystem_Click" Width="180"/>
+                    </WrapPanel>
+                </GroupBox>
+
+                <GroupBox Header="🔨 Дополнительные инструменты">
+                    <WrapPanel>
+                        <Button Name="btnCreateRestorePoint" Content="Создать точку восстановления" Click="CreateRestorePoint_Click" Width="200"/>
+                        <Button Name="btnFlushDNS" Content="Обновить DNS" Click="FlushDNS_Click" Width="200"/>
+                        <Button Name="btnResetWinsock" Content="Сбросить Winsock" Click="ResetWinsock_Click" Width="200"/>
+                        <Button Name="btnFixBoot" Content="Исправить загрузку" Click="FixBoot_Click" Width="200"/>
+                    </WrapPanel>
+                </GroupBox>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <Border Grid.Row="2" Background="#FF3F3F46" Padding="10">
+            <StackPanel>
+                <TextBlock Name="txtStatus" Text="Готов к работе" FontSize="12"/>
+                <ProgressBar Name="progressBar" Height="4" Margin="0,5,0,0" Background="#FF2D2D30" Foreground="#FF007ACC" Visibility="Collapsed"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
